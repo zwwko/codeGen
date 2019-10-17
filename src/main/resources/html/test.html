@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+	    <title>学生${tableInfo.tableName}xxx${moduleName}</title>
+
+	$${columnInfoList}
+
+	<@
+	for(obj in columnInfList){
+	@>
+	hello,@{obj.columnName};
+	<@ } @>
+
+	xxxxxxxxxxxxxxxxxx
+
+
+	<@
+	for(obj in columnInfQuery){
+	@>
+	hello,@{obj.columnName};
+	<@ } @>
