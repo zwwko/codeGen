@@ -68,7 +68,7 @@
                     </div>
                     <div class="layui-card-body nominheight">
                         <form id="form-submit" class="layui-form layuiadmin-card-header-auto search-card" lay-filter="pojo">
-                            <input type="hidden" name="orgIdxx" id="orgId" />
+                            <input type="hidden" name="orgId" id="orgId" />
                             <div class="layui-form-item">
                                 <@for(obj in columnInfQuery){if(obj.columnName!="id"){@>
                                 <div class="layui-inline">@{obj.remarks}</div>

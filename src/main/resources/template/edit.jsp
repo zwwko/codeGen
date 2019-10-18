@@ -50,6 +50,8 @@
 					  <@}else if(columnInfForm[i].typeName=='BIGINT'){@>
 					  <input type="hidden" name="@{columnInfForm[i].columnName}" id="@{columnInfForm[i].columnName}" >
 					  <input type="text" class="layui-input" id="@{columnInfForm[i].columnName}Date">
+					  <@}else if(columnInfForm[i].columnSize>1000){@>
+					  <textarea class="layui-textarea" name="@{columnInfForm[i].columnName}"></textarea>
 					  <@}else{@>
 					  <input type="text" class="layui-input" name="@{columnInfForm[i].columnName}" >
 					  <@}@>

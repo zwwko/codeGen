@@ -9,7 +9,7 @@ public class DbColumnInf {
     // 获得字段类型名称
     private String typeName;
     // 获得字段大小
-    private String columnSize;
+    private int columnSize;
     // 获得字段备注
     private String remarks;
     // 是否为主键
@@ -23,7 +23,7 @@ public class DbColumnInf {
     // 小数部分的位数
     private String decimalDigits;
 
-    public DbColumnInf(String columnName, String typeName, String columnSize, String remarks, boolean nullable,
+    public DbColumnInf(String columnName, String typeName, int columnSize, String remarks, boolean nullable,
                        boolean parmaryKey, boolean importedKey, String columnDef, String decimalDigits) {
         this.columnName = columnName;
         this.typeName = typeName;

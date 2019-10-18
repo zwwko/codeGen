@@ -28,9 +28,9 @@ public class Generator {
         String tableName = "supervisor_activity";
         String redirect = "supervisor/activity/sifa";
 
-        List<String> columnInfForm = Arrays.asList("hdmc,hdfqsj,hdfqdwjb,hdfqdwbh,hdfqdwmc".split(","));//新增,编辑
+        List<String> columnInfForm = Arrays.asList("hdfqdwmc,yqrs,hdlx,hdfqsj,hdsj,hddd,hdmc,hdnr".split(","));//新增,编辑
         List<String> columnInfQuery = Arrays.asList("hdmc,hdlx".split(","));//查询
-        List<String> columnInfList = Arrays.asList("hdmc,hdfqsj,hdfqdwjb,hdfqdwbh,hdfqdwmc,zzcxdwjb,hdzt".split(","));//列表
+        List<String> columnInfList = Arrays.asList("hdmc,hdlx,hdsj,hddd,yqrs,hdfqdwmc,hdzt".split(","));//列表
 
         execute(moduleName, tableName, columnInfForm, redirect, columnInfQuery, columnInfList);
     }
@@ -64,17 +64,19 @@ public class Generator {
         //当前表信息
 //        List<DbTableInf> listDbTableInf = dbHelper.getDbTables();
 //        DbTableInf tableInf = listDbTableInf.stream().filter(obj -> obj.getTableName().equals(tableName)).collect(Collectors.toList()).get(0);
-        DbTableInf tableInf = new DbTableInf(tableName, "");
+//        DbTableInf tableInf = new DbTableInf(tableName, "");
+        DbTableInf tableInf = dbHelper.getDbTableInf(tableName);
 
         List<DbColumnInf> columnInfs = dbHelper.getDbColumnInfo(tableInf.getTableName());
         columnInfs.forEach(obj -> obj.setColumnName(StringUtils.underlineToCamel(obj.getColumnName())));
+        Map<String, DbColumnInf> columnInfMap = columnInfs.stream().collect(Collectors.toMap(DbColumnInf::getColumnName,v->v));
 
-        System.out.println(columnInfs.stream().map(DbColumnInf::getColumnName).collect(Collectors.toList()));
+        System.out.println(columnInfMap.keySet());
 
 
-        List<DbColumnInf> columnInfForm = columnInfs.stream().filter(obj -> columnFormKeys.contains(obj.getColumnName())).collect(Collectors.toList());
-        List<DbColumnInf> columnInfQuery = columnInfs.stream().filter(obj -> columnsQueryKeys.contains(obj.getColumnName())).collect(Collectors.toList());
-        List<DbColumnInf> columnInfList = columnInfs.stream().filter(obj -> columnsListKeys.isEmpty() ? true : columnsListKeys.contains(obj.getColumnName())).collect(Collectors.toList());
+        List<DbColumnInf> columnInfForm = columnFormKeys.stream().map(key->columnInfMap.get(key)).collect(Collectors.toList());
+        List<DbColumnInf> columnInfQuery = columnsQueryKeys.stream().map(key->columnInfMap.get(key)).collect(Collectors.toList());;
+        List<DbColumnInf> columnInfList = columnsListKeys.isEmpty()?columnInfs:columnsListKeys.stream().map(key->columnInfMap.get(key)).collect(Collectors.toList());
 
 
         Map<String, Object> paramMap = new HashMap<>();

@@ -3,10 +3,7 @@ package com.hesc.codegen.data;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -53,6 +50,23 @@ public class DbHelper {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
+    public DbTableInf getDbTableInf(String tableName) throws SQLException {
+        String tableComentSql = "select t.TABLE_NAME,t.TABLE_COMMENT from information_schema.TABLES t where t.table_name = ?";
+        PreparedStatement pst = getConnection().prepareStatement(tableComentSql);
+        pst.setString(1,tableName);
+        ResultSet rs = pst.executeQuery();
+        String tableComment = tableName;
+        // 展开结果集数据库
+        while(rs.next()){
+            tableComment = rs.getString("TABLE_COMMENT");
+        }
+        rs.close();
+        pst.close();
+        return new DbTableInf(tableName,tableComment);
+    }
+
 
     public List<DbTableInf> getDbTables() {
         ResultSet resultSet = null;
@@ -115,7 +129,7 @@ public class DbHelper {
                 // 获得字段类型名称
                 String typeName = resultSet.getString("TYPE_NAME").toUpperCase();
                 // 获得字段大小
-                String columnSize = resultSet.getString("COLUMN_SIZE");
+                int columnSize = resultSet.getInt("COLUMN_SIZE");
                 // 获得字段备注
                 String remarks = resultSet.getString("REMARKS");
                 if (!StringUtils.isEmpty(remarks)) {
