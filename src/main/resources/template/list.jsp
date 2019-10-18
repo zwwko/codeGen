@@ -217,7 +217,7 @@
                 }
             };
             template.defaults.imports.dictformat = function(value, type){
-                if(null==type || null==value || "" ==value){
+                if(null==type || null==value || "" ==(value+"").trim()){
                     return value;
                 }
                 var dt =dict[type];
