@@ -10,6 +10,7 @@
 <script src="${ctx_module}/dist/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="${ctx_module}/plugins/layui/css/layui.css" />
 <link rel="stylesheet" href="${ctx_module}/dist/css/commen.css" />
+<link rel="stylesheet" href="${ctx_module}/plugins/layui-formSelects/dist/formSelects-v4.css" />
 <style type="text/css">
 .layui-btn-sm {
     height: 25px;
@@ -67,6 +68,7 @@
   </div>
 </div>
 <script type="text/javascript" src="${ctx_module}/plugins/layui/layui.all.js"></script>
+<script type="text/javascript" src="${ctx_module}/plugins/layui-formSelects/dist/formSelects-v4.min.js"></script>
 <script src="${ctx_module}/dist/js/jquery.ajaxCall.js"></script>
 <!-- ckeditor -->
 <script type="text/javascript" src="${ctx_module}/plugins/ckeditor/ckeditor.js"></script>

@@ -98,7 +98,7 @@
                                         <@for(obj in columnInfList){@>
                                         <th>@{obj.remarks}</th>
                                         <@}@>
-                                        <th>操作</th>
+                                        <th width="80">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody id="itemContainer">
